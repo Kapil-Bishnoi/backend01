@@ -5,6 +5,7 @@ import backend01.backend01.Service.UserService;
 import backend01.backend01.Web.dto.UserLoginDto;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -30,9 +31,16 @@ public class UserLoginController {
     }
 
     @PostMapping
-    public User loginUserAccount(@RequestBody UserLoginDto loginDto) throws NotFoundException {
-
-        return userService.loadUserByUsername(loginDto.getEmail(),loginDto.getPassword());
-
+    public UserDetails loginUserAccount(@RequestBody UserLoginDto loginDto) {
+        return userService.loadUserByUsername(loginDto.getEmail());
     }
+
+//
+//    @PostMapping
+//    public User loginUserAccount(@RequestBody UserLoginDto loginDto) throws NotFoundException {
+//
+//        return userService.loadUserByUsername(loginDto.getEmail(),loginDto.getPassword());
+//
+//    }
+
 }
